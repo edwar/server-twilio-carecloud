@@ -65,7 +65,7 @@ def twilio_api_video():
     print(jwt)
 
     return jsonify({
-        'token': jwt, 
+        'token': str(jwt), 
         'name': name, 
         'room': room
         })
