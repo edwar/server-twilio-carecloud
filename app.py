@@ -67,7 +67,7 @@ def twilio_api_video():
     print(jwt)
 
     return ujson.dumps({
-        'token': str(jwt), 
+        'token': jwt, 
         'name': name, 
         'room': room
         })
