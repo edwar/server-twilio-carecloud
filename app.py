@@ -2,6 +2,8 @@ from flask import Flask
 from flask import jsonify
 from flask import request
 
+import ujson
+
 application = Flask(__name__)
 
 @application.route('/')
@@ -64,7 +66,7 @@ def twilio_api_video():
 
     print(jwt)
 
-    return jsonify({
+    return ujson.dumps({
         'token': str(jwt), 
         'name': name, 
         'room': room
