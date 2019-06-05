@@ -72,7 +72,7 @@ def twilio_api_chat():
     chat_grant = ChatGrant(service_sid=service_sid)
     token.add_grant(chat_grant)
 
-    print(token.to_jwt())
+    print(token.to_jwt().decode('utf-8'))
 
     return ujson.dumps({
         'token': token.to_jwt(), 
