@@ -10,41 +10,7 @@ application = Flask(__name__)
 def hello_world():
     return 'Hello, World!'
     
-@application.route('/api/twilio/auth/video')
-def twilio_api_auth_video():
-     from twilio.rest import Client
 
-     # Your Account Sid and Auth Token from twilio.com/console for video
-     account_sid = 'AC0899dfbac4d4374a162ad3f494a29cb9'
-     auth_token = 'dcc16a90db9419c40e3a4752a8b59d31'
-     client = Client(account_sid, auth_token)
-
-     new_key = client.new_keys.create()
-     auth = {
-         'key': new_key.sid,
-         'secret': new_key.secret
-     }
-     print(new_key.secret)
-
-     return jsonify(auth)
-
-@application.route('/api/twilio/auth/chat')
-def twilio_api_auth_chat():
-     from twilio.rest import Client
-
-     # Your Account Sid and Auth Token from twilio.com/console fron chat
-     account_sid = 'AC1ab30057b0be6eaaa144ff94b773c882'
-     auth_token = '6ec8894a7733967f155c26d39feadf3a'
-     client = Client(account_sid, auth_token)
-
-     new_key = client.new_keys.create()
-     auth = {
-         'key': new_key.sid,
-         'secret': new_key.secret
-     }
-     print(new_key.secret)
-
-     return jsonify(auth)
 
 @application.route('/api/twilio/chat', methods=['GET'])
 def twilio_api_chat():
@@ -60,11 +26,9 @@ def twilio_api_chat():
     auth_token = '6ec8894a7733967f155c26d39feadf3a'
     client = Client(account_sid, auth_token)
 
-    new_key = client.new_keys.create()
-
     ACCOUNT_SID = account_sid
-    API_KEY_SID = new_key.sid
-    API_KEY_SECRET = new_key.secret
+    API_KEY_SID = 'SK08e688a95ac12a599a36deb2aec64a68'
+    API_KEY_SECRET = 'akrwxUmAompQjVNnpExLgOkMAf2m45iC'
 
     token = AccessToken(ACCOUNT_SID, API_KEY_SID, API_KEY_SECRET, identity=identity)
 
@@ -96,11 +60,10 @@ def twilio_api_video():
     auth_token = 'dcc16a90db9419c40e3a4752a8b59d31'
     client = Client(account_sid, auth_token)
 
-    new_key = client.new_keys.create()
 
     ACCOUNT_SID = account_sid
-    API_KEY_SID = new_key.sid
-    API_KEY_SECRET = new_key.secret
+    API_KEY_SID = ''
+    API_KEY_SECRET = ''
 
     # Create an Access Token
     token = AccessToken(ACCOUNT_SID, API_KEY_SID, API_KEY_SECRET)
