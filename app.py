@@ -69,8 +69,8 @@ def twilio_api_chat():
     token = AccessToken(ACCOUNT_SID, API_KEY_SID, API_KEY_SECRET, identity=identity)
 
     # Create an Chat grant and add to token
-    #chat_grant = ChatGrant(service_sid=service_sid)
-    #token.add_grant(chat_grant)
+    chat_grant = ChatGrant(service_sid=service_sid)
+    token.add_grant(chat_grant)
 
     print(token.to_jwt().decode('utf-8'))
 
