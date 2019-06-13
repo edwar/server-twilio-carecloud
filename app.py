@@ -43,6 +43,14 @@ def twilio_api_chat():
         'identity': identity
         })
 
+
+
+
+
+
+
+
+
 @application.route('/api/twilio/video', methods=['GET'])
 def twilio_api_video():
     from twilio.jwt.access_token import AccessToken
@@ -52,36 +60,23 @@ def twilio_api_video():
     name = request.args.get('name')
     room = request.args.get('room')
 
-    print(name)
-    print(room)
-
-    # Substitute your Twilio AccountSid and ApiKey details
-    account_sid = 'AC0899dfbac4d4374a162ad3f494a29cb9'
-    auth_token = 'dcc16a90db9419c40e3a4752a8b59d31'
-    client = Client(account_sid, auth_token)
-
-
-    ACCOUNT_SID = account_sid
-    API_KEY_SID = ''
-    API_KEY_SECRET = ''
+    ACCOUNT_SID = 'AC0899dfbac4d4374a162ad3f494a29cb9'
+    API_KEY_SID = 'SK0d73ceea012fd7a740cfea97b091b11f'
+    API_KEY_SECRET = '9c2gxH04Fd2RNV9EePMYW1XmeNP1ehOm'
 
     # Create an Access Token
-    token = AccessToken(ACCOUNT_SID, API_KEY_SID, API_KEY_SECRET)
+    token = AccessToken(ACCOUNT_SID, API_KEY_SID, API_KEY_SECRET, identity=name)
 
-    # Set the Identity of this token
-    token.identity = name
 
     # Grant access to Video
     grant = VideoGrant(room=room)
     token.add_grant(grant)
 
-    # Serialize the token as a JWT
-    jwt = token.to_jwt()
 
-    print(jwt)
+    print(token.to_jwt())
 
     return ujson.dumps({
-        'token': jwt, 
+        'token': token.to_jwt(), 
         'name': name, 
         'room': room
         })
